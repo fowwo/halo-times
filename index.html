@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Halo Times</title>
+	<meta name="author" content="fowwo">
+	<meta charset="UTF-8">
+	<link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="time.js"></script>
+<body>
+	<header>
+		<div class="container">
+			<nav class="lefttab">
+				<ul>
+					<li><button onclick='loadGame("ce");'>Halo: CE</button></li>
+					<li><button onclick='loadGame("2");'>Halo 2</button></li>
+					<li><button onclick='loadGame("3");'>Halo 3</button></li>
+					<li><button onclick='loadGame("odst");'>Halo 3: ODST</button></li>
+					<li><button onclick='loadGame("reach");'>Halo: Reach</button></li>
+					<li><button onclick='loadGame("4");'>Halo 4</button></li>
+				</ul>
+			</nav>
+			<nav class="righttab"></nav>
+		</div>
+	</header>
+	<div class="background"></div>
+	<h1 id="heading">Choose a game</h1>
+	<table id="time-table" class="center">
+		<tr>
+			<th>Mission</th>
+			<th>Par Time</th>
+			<th>Personal Best</th>
+			<th>+ / -</th>
+		</tr>
+		<tr>
+			<th style="color: #cdf5;">--------------------</td>
+			<th style="text-align: center; color: #cdf5;">--:--:--</td>
+			<th style="text-align: center; color: #cdf5;">--:--:--</td>
+			<th style="text-align: center; color: #cdf5;">--:--:--</td>
+		</tr>
+	</table>
+</body>
+</html>
