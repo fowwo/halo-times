@@ -45,7 +45,7 @@ function formatToSeconds(time) {
 	for (i = 0; i < split.length && i < 3; i++) {
 		let x = split[split.length - i - 1];
 		if (isValidNumber(x)) {
-			parseSplit[i] = Number.parseInt(x);
+			parseSplit[i] = Number.parseInt(+x);
 		} else {
 			console.warn("\"%s\" is not a valid time (\"%s\" is not a number).", time, split[i]);
 		}
