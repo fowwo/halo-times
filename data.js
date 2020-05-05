@@ -364,12 +364,6 @@ function loadGame(game) {
 			row.appendChild(cell);
 
 			cell = document.createElement("td");
-			cell.style = "text-align: center;";
-			cell.innerHTML = formatFromSeconds(mission.par);
-			row.appendChild(cell);
-			totalPar += mission.par;
-
-			cell = document.createElement("td");
 			if (mission.personalBest == -1) {
 				cell.innerHTML = "--:--:--";
 				cell.style = "text-align: center;color: #cdf5;";
@@ -380,6 +374,12 @@ function loadGame(game) {
 				totalPersonalBest += mission.personalBest;
 			}
 			row.appendChild(cell);
+
+			cell = document.createElement("td");
+			cell.style = "text-align: center;";
+			cell.innerHTML = formatFromSeconds(mission.par);
+			row.appendChild(cell);
+			totalPar += mission.par;
 
 			const delta = mission.personalBest - mission.par;
 			cell = document.createElement("td");
@@ -429,11 +429,6 @@ function loadGame(game) {
 		row.appendChild(cell);
 
 		cell = document.createElement("th");
-		cell.style = "text-align: center;";
-		cell.innerHTML = formatFromSeconds(totalPar);
-		row.appendChild(cell);
-
-		cell = document.createElement("th");
 		if (displayTotal) {
 			cell.style = "text-align: center;";
 			cell.innerHTML = formatFromSeconds(totalPersonalBest);
@@ -441,6 +436,11 @@ function loadGame(game) {
 			cell.style = "text-align: center;color: #cdf5;";
 			cell.innerHTML = "--:--:--";
 		}
+		row.appendChild(cell);
+
+		cell = document.createElement("th");
+		cell.style = "text-align: center;";
+		cell.innerHTML = formatFromSeconds(totalPar);
 		row.appendChild(cell);
 
 		cell = document.createElement("th");
