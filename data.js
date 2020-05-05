@@ -349,10 +349,20 @@ function loadGame(game) {
 
 		var row;
 		var cell;
-		var totalPar = 0;
 		var totalPersonalBest = 0;
-		var totalDelta = 0;
-		let displayTotal = true;
+		var totalPar = 0;
+		var totalParDelta = 0;
+		var totalThreeHour = 0;
+		var totalThreeHourDelta = 0;
+		var displayTotal = true;
+
+		var threeHourScale = 0;
+		for (var i = 0; i < games[game].missions.length; i++) {
+			let mission = games[game].missions[i];
+			threeHourScale += mission.par;
+		}
+		threeHourScale = 10800 / threeHourScale;
+
 		for (var i = 0; i < games[game].missions.length; i++) {
 			let mission = games[game].missions[i];
 
@@ -381,7 +391,7 @@ function loadGame(game) {
 			row.appendChild(cell);
 			totalPar += mission.par;
 
-			const delta = mission.personalBest - mission.par;
+			var delta = mission.personalBest - mission.par;
 			cell = document.createElement("td");
 			if (mission.personalBest == -1) {
 				cell.innerHTML = "--:--:--";
@@ -395,7 +405,29 @@ function loadGame(game) {
 				cell.innerHTML = formatDelta(delta);
 			}
 			row.appendChild(cell);
-			totalDelta += delta;
+			totalParDelta += delta;
+
+			cell = document.createElement("td");
+			cell.style = "text-align: center;";
+			cell.innerHTML = formatFromSeconds(mission.par * threeHourScale);
+			row.appendChild(cell);
+			totalThreeHour += Math.floor(mission.par * threeHourScale);
+
+			delta = mission.personalBest - Math.floor(mission.par * threeHourScale);
+			cell = document.createElement("td");
+			if (mission.personalBest == -1) {
+				cell.innerHTML = "--:--:--";
+				cell.style = "text-align: center;color: #cdf5;";
+			} else {
+				if (delta > 0) {
+					cell.style = "text-align: center;color: #f00;text-shadow: 0 0 10px #f00;";
+				} else {
+					cell.style = "text-align: center;color: #0f0;text-shadow: 0 0 10px #0f0;";
+				}
+				cell.innerHTML = formatDelta(delta);
+			}
+			row.appendChild(cell);
+			totalThreeHourDelta += delta;
 
 			row.onclick = () => {
 				let result = prompt("What would you like to set your " + mission.title + " time to?");
@@ -445,12 +477,31 @@ function loadGame(game) {
 
 		cell = document.createElement("th");
 		if (displayTotal) {
-			if (totalDelta > 0) {
+			if (totalParDelta > 0) {
 				cell.style = "text-align: center;color: #f00;text-shadow: 0 0 10px #f00;";
 			} else {
 				cell.style = "text-align: center;color: #0f0;text-shadow: 0 0 10px #0f0;";
 			}
-			cell.innerHTML = formatDelta(totalDelta);
+			cell.innerHTML = formatDelta(totalParDelta);
+		} else {
+			cell.style = "text-align: center;color: #cdf5;";
+			cell.innerHTML = "--:--:--";
+		}
+		row.appendChild(cell);
+
+		cell = document.createElement("th");
+		cell.style = "text-align: center;";
+		cell.innerHTML = formatFromSeconds(totalThreeHour);
+		row.appendChild(cell);
+
+		cell = document.createElement("th");
+		if (displayTotal) {
+			if (totalThreeHourDelta > 0) {
+				cell.style = "text-align: center;color: #f00;text-shadow: 0 0 10px #f00;";
+			} else {
+				cell.style = "text-align: center;color: #0f0;text-shadow: 0 0 10px #0f0;";
+			}
+			cell.innerHTML = formatDelta(totalThreeHourDelta);
 		} else {
 			cell.style = "text-align: center;color: #cdf5;";
 			cell.innerHTML = "--:--:--";
