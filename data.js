@@ -399,9 +399,7 @@ function loadGame(game) {
 
 			row.onclick = () => {
 				let result = prompt("What would you like to set your " + mission.title + " time to?");
-				if (result == null) {
-					// Do nothing.
-				} else {
+				if (result != null) {
 					result = result.trim();
 					if (result == "") {
 						if (confirm("Do you want to clear your personal best time on " + mission.title + "?") == true) {
